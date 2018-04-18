@@ -36,10 +36,10 @@ function getDetail($str){
     $s_time = substr($data[0],9);
     $info_from = substr($data[1],9);
 
-    $content = "<style>p:text-indent:2em;</style>";
+    $content = "<style>p {text-indent:2em;line-height: 1.75em;font-family: \'微软雅黑\', \'Microsoft YaHei\'; font-size: 14px;}</style>";
 
     foreach($contents as $k =>$v) {
-    $content .= "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$v."</p><br>";
+    $content .= "<p>".$v."</p>";
     }
         $arr = [
             'title'=>$title,
@@ -70,7 +70,7 @@ function getTodayInfo($str)
 // 插入数据
 function insertData($data)
 {
-   
+   try {
     $connect=mysqli_connect(MYSQL_CONF['host'],MYSQL_CONF['user'],MYSQL_CONF['psd'],MYSQL_CONF['dbname']);
     
     $create_time = date('Y-m-d h:s:i');
@@ -86,5 +86,9 @@ function insertData($data)
     $result=mysqli_query($connect,$sql);
 
     return $result; 
+   } catch (\Exception $e) {
+        throw new \Exception($e->getMessage());
+   }
+
 }
 

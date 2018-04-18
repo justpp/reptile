@@ -16,7 +16,8 @@ function urlSpider($url)
             if ($data['time'] == $date_time) {
                 $arr[] = $data;
             }else{
-                die('今天没有新闻');
+                echo '不是今天的新闻,跳过'."\n";
+                continue;
             }
         }
     }
@@ -37,7 +38,7 @@ function urlSpider($url)
             'info_from' => $news_info['info_from']
         ];
         $bool = insertData($news_data[$k]);
-    
+
     }
     return $bool;
 }
